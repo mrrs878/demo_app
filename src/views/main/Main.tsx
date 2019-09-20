@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Tabs, WhiteSpace, NavBar, Icon } from 'antd-mobile';
+import { Tabs, NavBar, Icon } from 'antd-mobile';
 
 import Recommend from '../recommend/Recommend'
 import Singers from '../signers/Singers'

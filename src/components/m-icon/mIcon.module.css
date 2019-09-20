@@ -1,0 +1,18 @@
+.svgContainer {
+  text-align: center;
+  height: 18px;
+  display: flex;
+  align-items: center;
+}
+.svgContainer .svgIcon {
+  height: 18px;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 18px;
+  vertical-align: middle;
+}
+.svgContainer .text {
+  color: #fff;
+  font-size: 10px;
+}

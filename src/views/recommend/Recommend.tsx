@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 
-import { Carousel, WingBlank } from 'antd-mobile'
+import { Carousel, WingBlank, WhiteSpace } from 'antd-mobile'
 
 import { getBanners, getRecommendList } from '../../config/api'
 import { AxiosResponse } from 'axios'
 import MScroll from '../../components/m-scroll/MScroll'
+import MIcon from '../../components/m-icon/mIcon'
 
 //@ts-ignore
 import recommendStyle from './recommend.module.less'
@@ -47,42 +48,57 @@ const Recommend = () => {
     }).catch(e => {
       console.log(e);
     })
-    // getRecommendList().then((res: AxiosResponse<IRecommendListRes>) => {
-    //   console.log(res.data.result);
-    //   setRecommendList(res.data.result)
-    // }).catch(e => {
-    //   console.log(e);
-    // })
+    getRecommendList().then((res: AxiosResponse<IRecommendListRes>) => {
+      console.log(res.data.result);
+      setRecommendList(res.data.result)
+    }).catch(e => {
+      console.log(e);
+    })
   }, [])
 
   return (
     <div className={ recommendStyle.content }>
+      <WhiteSpace style={{ backgroundColor: '#d44439' }} />
       <MScroll>
-        <Carousel
-          autoplay={ true }
-          infinite
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
-        >
-          {
-            banners.map((banner, index) => (
-              <img
-                key={ index }
-                src={ banner.imageUrl }
-                alt=""
-                style={{ width: '100%', verticalAlign: 'top', height: '160px', borderRadius: '5px' }}
-                onLoad={() => {
-                  // fire window resize event to change height
-                  window.dispatchEvent(new Event('resize'));
-                }}
-              />
-            ))
-          }
-        </Carousel>
-        <div style={{ height: '200px' }}>111</div>
-        <div style={{ height: '200px' }}>111</div>
-        <div style={{ height: '200px' }}>111</div>
-        <div style={{ height: '200px' }}>111</div>
+        <div>
+          <Fragment>
+            <div className={ recommendStyle.carouselBefore }></div>
+            <Carousel
+              autoplay={ true }
+              infinite
+              beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+              afterChange={index => console.log('slide to', index)}
+            >
+              {
+                banners.map((banner, index) => (
+                  <img
+                    key={ index }
+                    src={ banner.imageUrl }
+                    alt=""
+                    style={{ width: '98%', verticalAlign: 'top', borderRadius: '5px', margin: '0 auto' }}
+                    onLoad={() => {
+                      // fire window resize event to change height
+                      window.dispatchEvent(new Event('resize'));
+                    }}
+                  />
+                ))
+              }
+            </Carousel>
+          </Fragment>
+          <div className={ recommendStyle.listContainer }>
+            {
+              recommendList.map(item => (
+                <div className={ recommendStyle.listItem }>
+                  <img src={ item.picUrl } width="100%"/>
+                  <div className={ recommendStyle.itemListen }>
+                    <MIcon name="icon-erji" size={13}>{ `${Math.ceil(item.playCount/10000)}万` }</MIcon>
+                  </div>
+                  <p className={ recommendStyle.itemText }>{ item.name }</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </MScroll>
     </div>
   )

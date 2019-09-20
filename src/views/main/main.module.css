@@ -1,0 +1,10 @@
+.content .header {
+  background-color: #d44439;
+  color: #fff;
+}
+.content .header div:nth-child(2) {
+  color: #fff;
+}
+.content .item {
+  height: calc(99vh);
+}

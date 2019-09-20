@@ -1,26 +1,26 @@
 import React from 'react'
 
 //@ts-ignore
-import mIConProps from './mIcon.module.less'
+import mIConStyle from './mIcon.module.less'
 
 interface IMIconProps {
   name: string,
-  text?: string,
-  color?: string
+  className?: string,
+  color?: string,
+  size?: number
 }
 
 const mIcon: React.FC<IMIconProps> = (props) => (
-  <div className={ mIConProps.svgContainer } style={{fill: props.color}}>
-    <svg className={ mIConProps.svgIcon } aria-hidden={ true }>
+  <div className={`${ mIConStyle.svgContainer } ${ props.className }`} style={{ fill: props.color }}>
+    <svg className={ mIConStyle.svgIcon } aria-hidden={ true } style={{height: `${props.size}px`, lineHeight: `${props.size}px`}}>
       <use xlinkHref={ `#${props.name}` }></use>
     </svg>
-    <p>{ props.text }</p>
+    <p className={ mIConStyle.text }>{ props.children}</p>
   </div>
 )
 
 mIcon.defaultProps = {
   name: '',
-  text: '',
   color: '#fff'
 }
 
