@@ -1,0 +1,43 @@
+@import "../../assets/less/global.less";
+
+.content {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url("../../assets//images//loginBg.jpg");
+  background-size: 100% 100%;
+  .loginForm {
+    margin: 0 auto;
+    width: 80%;
+    .listItem {
+      div:nth-child(1) {
+        background-color: #00000000;
+        display: flex;
+        align-items: center;
+        div:first-child {
+          flex: 1;
+        }
+        &:before {
+          height: 0;
+        }
+      }
+      .forgetPwd {
+        color: @mainColor;
+        width: 60px;
+        text-align: center;
+      }
+    }
+    .inputContainer {
+      input {
+        color: #fff;
+      }
+    }
+    .actions {
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.28rem;
+      color: #ccc;
+    }
+  }
+}
