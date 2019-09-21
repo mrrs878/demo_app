@@ -42,3 +42,11 @@ export interface IRecommendList {
   highQuality: boolean,
   alg: string
 }
+
+export interface ISong {
+  id: number,
+  url: string,
+  type: string,
+  size: number,
+  leval: string
+}

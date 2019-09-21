@@ -1,4 +1,4 @@
-import { IBanner, IRecommendList } from './index'
+import { IBanner, IRecommendList, ISong } from './index'
 
 export interface IBannerRes {
   banners: Array<IBanner>,
@@ -9,4 +9,9 @@ export interface IRecommendListRes {
   hasTaste: boolean,
   category: number,
   result: Array<IRecommendList>
+}
+
+export interface ISongRes {
+  code: number,
+  data: Array<ISong>
 }

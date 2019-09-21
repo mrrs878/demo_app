@@ -7,11 +7,12 @@ interface IMIconProps {
   name: string,
   className?: string,
   color?: string,
-  size?: number
+  size?: number,
+  onClick?: () => void
 }
 
 const mIcon: React.FC<IMIconProps> = (props) => (
-  <div className={`${ mIConStyle.svgContainer } ${ props.className }`} style={{ fill: props.color }}>
+  <div className={`${ mIConStyle.svgContainer } ${ props.className }`} style={{ fill: props.color }} onClick={ props.onClick }>
     <svg className={ mIConStyle.svgIcon } aria-hidden={ true } style={{height: `${props.size}px`, lineHeight: `${props.size}px`, width: `${props.size}px`}}>
       <use xlinkHref={ `#${props.name}` }></use>
     </svg>

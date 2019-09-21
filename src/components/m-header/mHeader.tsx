@@ -18,7 +18,7 @@ const Header: React.FC<IMHeaderProps> = props => (
       <MIcon name="icon-back" color={ props.titleColor } size={ props.size }>{ props.titlePosition === 'center' ? '' : props.children }</MIcon>
     </div>
     <div className={ mHeaderStyle.center } style={{ color: props.titleColor, fontSize: props.size }}>
-      { props.children }
+      { props.titlePosition === 'left' ? '' : props.children }
     </div>
     <div className={ mHeaderStyle.right }>
     </div>
