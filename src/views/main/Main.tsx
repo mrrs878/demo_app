@@ -5,7 +5,7 @@ import { Tabs, NavBar, Icon } from 'antd-mobile';
 import Recommend from '../recommend/Recommend'
 import Singers from '../signers/Singers'
 import Charts from '../charts/Charts'
-import MIcon from '../../components/m-icon/mIcon'
+import MIcon from '../../components/m-icon/MIcon'
 
 //@ts-ignore
 import mainStyle from './main.module.less'

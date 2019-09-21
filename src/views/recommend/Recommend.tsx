@@ -1,43 +1,21 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import { Carousel, WingBlank, WhiteSpace } from 'antd-mobile'
+import { Carousel } from 'antd-mobile'
 
 import { getBanners, getRecommendList } from '../../config/api'
 import { AxiosResponse } from 'axios'
 import MScroll from '../../components/m-scroll/MScroll'
-import MIcon from '../../components/m-icon/mIcon'
+import MIcon from '../../components/m-icon/MIcon'
+import { IBanner, IRecommendList } from '../../interfaces/index'
+import { IBannerRes, IRecommendListRes } from '../../interfaces/ajaxRes'
 
 //@ts-ignore
 import recommendStyle from './recommend.module.less'
 
-interface IBanner {
-  imageUrl: string,
-  url: string
-}
-interface IBannerRes {
-  banners: Array<IBanner>,
-  code: number
-}
+interface IRecommendProps extends RouteComponentProps {}
 
-interface IRecommendList {
-  type: number,
-  name: string,
-  copywriter: string,
-  picUrl: string,
-  canDislike: boolean,
-  playCount: number,
-  trackCount: number,
-  highQuality: boolean,
-  alg: string
-}
-interface IRecommendListRes {
-  code: number,
-  hasTaste: boolean,
-  category: number,
-  result: Array<IRecommendList>
-}
-
-const Recommend = () => {
+const Recommend: React.FC<IRecommendProps> = props => {
   const [ banners, setBanners ] = useState(new Array<IBanner>())
   const [ recommendList, setRecommendList ] = useState(new Array<IRecommendList>())
 
@@ -58,37 +36,35 @@ const Recommend = () => {
 
   return (
     <div className={ recommendStyle.content }>
-      <WhiteSpace style={{ backgroundColor: '#d44439' }} />
       <MScroll>
         <div>
-          <Fragment>
-            <div className={ recommendStyle.carouselBefore }></div>
-            <Carousel
-              autoplay={ true }
-              infinite
-              beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-              afterChange={index => console.log('slide to', index)}
-            >
-              {
-                banners.map((banner, index) => (
-                  <img
-                    key={ index }
-                    src={ banner.imageUrl }
-                    alt=""
-                    style={{ width: '98%', verticalAlign: 'top', borderRadius: '5px', margin: '0 auto' }}
-                    onLoad={() => {
-                      // fire window resize event to change height
-                      window.dispatchEvent(new Event('resize'));
-                    }}
-                  />
-                ))
-              }
-            </Carousel>
-          </Fragment>
+          <div className={ recommendStyle.carouselBefore }></div>
+          <Carousel
+            style={{ paddingTop: '0.2rem' }}
+            autoplay={ true }
+            infinite
+            beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+            afterChange={index => console.log('slide to', index)}
+          >
+            {
+              banners.map((banner, index) => (
+                <img
+                  key={ index }
+                  src={ banner.imageUrl }
+                  alt=""
+                  style={{ width: '98%', verticalAlign: 'top', borderRadius: '5px', margin: '0 auto' }}
+                  onLoad={() => {
+                    // fire window resize event to change height
+                    window.dispatchEvent(new Event('resize'));
+                  }}
+                />
+              ))
+            }
+          </Carousel>
           <div className={ recommendStyle.listContainer }>
             {
-              recommendList.map(item => (
-                <div className={ recommendStyle.listItem }>
+              recommendList.map((item, index) => (
+                <div key={ index } className={ recommendStyle.listItem } onClick={ () => props.history.push(`/recommend/${ item.id }`) }>
                   <img src={ item.picUrl } width="100%"/>
                   <div className={ recommendStyle.itemListen }>
                     <MIcon name="icon-erji" size={13}>{ `${Math.ceil(item.playCount/10000)}万` }</MIcon>
@@ -104,4 +80,4 @@ const Recommend = () => {
   )
 }
 
-export default Recommend
+export default withRouter(Recommend)

@@ -4,6 +4,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import loginRoutes from './login'
 import mainRoutes from './main'
+import recommendRoutes from './recommend'
+import playerRoutes from './player'
 
 export interface IRouteConfig {
   path: string,
@@ -13,7 +15,9 @@ export interface IRouteConfig {
 
 const routes = [
   ...loginRoutes,
-  ...mainRoutes
+  ...mainRoutes,
+  ...recommendRoutes,
+  ...playerRoutes
 ]
 
 const Routes = () => {

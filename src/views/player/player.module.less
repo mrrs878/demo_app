@@ -1,0 +1,68 @@
+.content {
+  height: 100vh;
+  .bg {
+    height: calc(100% - 1rem);
+    width: 100%;
+    box-sizing: border-box;
+    background: url("http://p2.music.126.net/7H3R_hFWpcqsYHqKpjIKGg==/109951164371661836.jpg")
+      no-repeat center center;
+    background-size: 100% 100%;
+    filter: blur(40px);
+    position: absolute;
+    z-index: -1;
+  }
+  .playerContainer {
+    height: calc(100% - 1rem);
+    box-sizing: border-box;
+    padding-top: 1rem;
+    .pic {
+      background: url("http://p2.music.126.net/7H3R_hFWpcqsYHqKpjIKGg==/109951164371661836.jpg")
+        no-repeat center center;
+      background-size: 100% 100%;
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%;
+      margin: 0 auto;
+      animation: rotation 20s linear infinite;
+      -moz-animation: rotation 20s linear infinite;
+      -webkit-animation: rotation 20s linear infinite;
+      -o-animation: rotation 20s linear infinite;
+    }
+    @-moz-keyframes rotation {
+      0% {
+        -moz-transform: rotate(0deg);
+      }
+      100% {
+        -moz-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes rotation {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .control {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      height: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@import "../../assets/less/global.less";
+
+.content {
+  height: calc(100vh - 1rem);
+  width: 100vw;
+  .listInfoContainer {
+    width: 100%;
+    margin-top: -1rem;
+    box-sizing: border-box;
+    &Bg {
+      height: 4rem;
+      width: 100%;
+      filter: blur(20px);
+      position: absolute;
+      z-index: -1;
+    }
+    .listInfo {
+      padding: 1.2rem 0.4rem 0.4rem;
+      display: flex;
+      font-size: 0.32rem;
+      color: #fff;
+      &Bg {
+        width: 2rem;
+        height: 2rem;
+      }
+      &Text {
+        margin-left: 0.4rem;
+        margin-top: 0.4rem;
+        font-weight: 700;
+      }
+    }
+    .listAction {
+      padding: 0 0.4rem 0.4rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .scrollContainer {
+    height: calc(100vh - 5.5rem);
+    .listContainer {
+      padding: 0 0.2rem;
+      &Item {
+        display: flex;
+        align-items: center;
+        font-size: 0.32rem;
+        &Info {
+          margin-left: 0.8rem;
+          color: #ccc;
+          font-size: 0.24rem;
+          &Signer {
+            color: #000;
+            font-size: 0.32rem;
+          }
+        }
+        position: relative;
+        &:after {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          transform: scaleY(0.5);
+          content: "";
+          background-color: #eee;
+        }
+      }
+    }
+  }
+  .listFooter {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 1rem;
+    background-color: #fff;
+    line-height: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 0.2rem;
+    &Btn {
+      border: none;
+      background-color: @mainBgColor;
+      outline: none;
+      color: #fff;
+      height: 100%;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      font-size: 0.32rem;
+      width: 2rem;
+      z-index: 3;
+    }
+  }
+}
