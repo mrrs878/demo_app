@@ -3,7 +3,7 @@ import React from 'react'
 import { Tabs, NavBar, Icon } from 'antd-mobile';
 
 import Recommend from '../recommend/Recommend'
-import Singers from '../signers/Singers'
+import Singers from '../singers/Singers'
 import Charts from '../charts/Charts'
 import MIcon from '../../components/m-icon/MIcon'
 
@@ -36,7 +36,8 @@ const Main = () => {
           tabBarInactiveTextColor="#fff"
           tabBarUnderlineStyle={ { height: '3px', backgroundColor: '#fff', border: 'none' } }
           tabs={tabs}
-          initialPage={0}
+          swipeable={false}
+          initialPage={1}
           onChange={(tab, index) => { console.log('onChange', index, tab); }}
           onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
         >

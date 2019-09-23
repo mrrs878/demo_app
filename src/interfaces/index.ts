@@ -1,10 +1,3 @@
-export interface ISinger {
-  id: number,
-  name: string,
-  tns: [],
-  alias: []
-}
-
 export interface ITrack {
   name: string,
   id: number,
@@ -48,5 +41,17 @@ export interface ISong {
   url: string,
   type: string,
   size: number,
-  leval: string
+  level: string
+}
+
+export interface ISinger {
+  id: number,
+  img1v1Id: number,
+  img1v1Url: string,
+  followed: boolean,
+  musicSize: number,
+  albumSize: number,
+  picId: number,
+  picUrl: string
+  name: string
 }

@@ -3,11 +3,11 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { Carousel } from 'antd-mobile'
 
-import { getBanners, getRecommendList } from '../../config/api'
+import { getBanners, getRecommendList } from '../../apis/api'
 import { AxiosResponse } from 'axios'
 import MScroll from '../../components/m-scroll/MScroll'
 import MIcon from '../../components/m-icon/MIcon'
-import { IBanner, IRecommendList } from '../../interfaces/index'
+import { IBanner, IRecommendList } from '../../interfaces'
 import { IBannerRes, IRecommendListRes } from '../../interfaces/ajaxRes'
 
 //@ts-ignore
@@ -16,29 +16,27 @@ import recommendStyle from './recommend.module.less'
 interface IRecommendProps extends RouteComponentProps {}
 
 const Recommend: React.FC<IRecommendProps> = props => {
-  const [ banners, setBanners ] = useState(new Array<IBanner>())
-  const [ recommendList, setRecommendList ] = useState(new Array<IRecommendList>())
+  const [ banners, setBanners ] = useState(new Array<IBanner>());
+  const [ recommendList, setRecommendList ] = useState(new Array<IRecommendList>());
 
   useEffect(() => {
     getBanners().then((res: AxiosResponse<IBannerRes>) => {
-      console.log(res);
       setBanners(res.data.banners)
     }).catch(e => {
       console.log(e);
-    })
+    });
     getRecommendList().then((res: AxiosResponse<IRecommendListRes>) => {
-      console.log(res.data.result);
       setRecommendList(res.data.result)
     }).catch(e => {
       console.log(e);
     })
-  }, [])
+  }, []);
 
   return (
     <div className={ recommendStyle.content }>
       <MScroll>
         <div>
-          <div className={ recommendStyle.carouselBefore }></div>
+          <div className={recommendStyle.carouselBefore}/>
           <Carousel
             style={{ paddingTop: '0.2rem' }}
             autoplay={ true }
@@ -65,7 +63,7 @@ const Recommend: React.FC<IRecommendProps> = props => {
             {
               recommendList.map((item, index) => (
                 <div key={ index } className={ recommendStyle.listItem } onClick={ () => props.history.push(`/recommend/${ item.id }`) }>
-                  <img src={ item.picUrl } width="100%"/>
+                  <img src={ item.picUrl } width="100%" alt=""/>
                   <div className={ recommendStyle.itemListen }>
                     <MIcon name="icon-erji" size={13}>{ `${Math.ceil(item.playCount/10000)}万` }</MIcon>
                   </div>
@@ -78,6 +76,6 @@ const Recommend: React.FC<IRecommendProps> = props => {
       </MScroll>
     </div>
   )
-}
+};
 
 export default withRouter(Recommend)

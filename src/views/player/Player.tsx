@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import MHeader from '../../components/m-header/MHeader'
 import MIcon from '../../components/m-icon/MIcon'
-import { getSongURL } from '../../config/api'
+import { getSongURL } from '../../apis/api'
 import { AxiosResponse } from 'axios'
 import { ISongRes } from '../../interfaces/ajaxRes'
 import { ISong } from '../../interfaces/index'
@@ -22,14 +22,14 @@ class Song implements ISong {
   url: string
   type: string
   size: number
-  leval: string
+  level: string
 
-  constructor(id = 0, url = '', type = '', size = 0, leval = '') {
+  constructor(id = 0, url = '', type = '', size = 0, level = '') {
     this.id = id
     this.url = url
     this.type = type
     this.size = size
-    this.leval = leval
+    this.level = level
   }
 }
 
@@ -41,7 +41,7 @@ const Player: React.FC<IPlayerProps> = props => {
   const [ playTime, setPlayTime ] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const timeLineRef = useRef<HTMLDivElement>(null)
-  
+
   useEffect(() => {
     setSongId(props.match.params.id)
   })
@@ -55,7 +55,7 @@ const Player: React.FC<IPlayerProps> = props => {
     if(songId) {
       // getSongURL({ id: songId }).then((e: AxiosResponse<ISongRes>) => {
       //   setSong(e.data.data)
-      // }).catch(e => 
+      // }).catch(e =>
       //   console.log(e)
       // )
     }

@@ -5,3 +5,8 @@ export interface IGetListDetail {
 export interface IGetSongURL {
   id: string
 }
+
+export interface IGetSingers {
+  cat: string,
+  initial: string
+}

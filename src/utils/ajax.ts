@@ -9,7 +9,7 @@ function toLogin() {}
 
 function errHandler(status: number, other: any) {
   switch (status) {
-		case 400: 
+		case 400:
 			tip(other)
 			break;
     case 401:
@@ -43,8 +43,8 @@ const instance = axios.create({ timeout: 1000*12 })
 instance.interceptors.request.use(
   config => {
     // const token = localStorage.getItem('accessToken')
-    // config.headers.withCredentials = true
-    // token && (config.headers.Authorization = token)
+    // apis.headers.withCredentials = true
+    // token && (apis.headers.Authorization = token)
     return config
   },
   err => Promise.reject(err)

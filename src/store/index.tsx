@@ -1,17 +1,23 @@
-import React, { createContext } from 'react'
+import React, {createContext, Dispatch, useReducer} from 'react'
 
-import { IRecommendList } from '../interfaces/index'
+import { rootReducer, DEFAULT_STATE } from './reducer'
+import * as actions from './action'
 
-export const RootContext = createContext({})
+interface IContext {
+  state: typeof DEFAULT_STATE,
+  dispatch?: Dispatch<actions.IAction>
+}
+const RootContext = createContext<IContext>({ state: DEFAULT_STATE});
 
-export interface IRootStoreProps {}
-
+interface IRootStoreProps {}
 const RootStore: React.FC<IRootStoreProps> = props => {
+  const [ state, dispatch ] = useReducer(rootReducer, DEFAULT_STATE);
+
   return (
-    <RootContext.Provider value={{}}>
+    <RootContext.Provider value={ { state, dispatch } }>
       { props.children }
     </RootContext.Provider>
   )
-}
-
+};
+export { RootContext, actions }
 export default RootStore

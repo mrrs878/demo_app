@@ -5,7 +5,7 @@ import { AxiosResponse } from 'axios'
 import MHeader from '../../components/m-header/MHeader'
 import MScroll from '../../components/m-scroll/MScroll'
 import MIcon from '../../components/m-icon/MIcon'
-import { getListDetail } from '../../config/api'
+import { getListDetail } from '../../apis/api'
 import { IPlayList, ITrack, IListDetailRes } from '../../interfaces/index'
 
 //@ts-ignore

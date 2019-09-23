@@ -10,3 +10,5 @@ export const getRecommendList = () => ajax.get(`${PERSONALIZED_URL}`)
 export const getListDetail = (params: apiParams.IGetListDetail) => ajax.get(`${BASE_URL}/playlist/detail?id=${params.id}`)
 
 export const getSongURL = (params: apiParams.IGetSongURL) => ajax.get(`${BASE_URL}/song/url?id=${params.id}`)
+
+export const gertSingers = (params: apiParams.IGetSingers) => ajax.get(`${BASE_URL}/artist/list?cat=${params.cat}&initial=${params.initial}`)

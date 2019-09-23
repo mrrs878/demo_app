@@ -6,6 +6,7 @@ import loginRoutes from './login'
 import mainRoutes from './main'
 import recommendRoutes from './recommend'
 import playerRoutes from './player'
+import singersRoutes from './singers'
 
 export interface IRouteConfig {
   path: string,
@@ -17,8 +18,9 @@ const routes = [
   ...loginRoutes,
   ...mainRoutes,
   ...recommendRoutes,
-  ...playerRoutes
-]
+  ...playerRoutes,
+  ...singersRoutes
+];
 
 const Routes = () => {
   return (
@@ -32,6 +34,6 @@ const Routes = () => {
       </Switch>
     </BrowserRouter>
   )
-}
+};
 
 export default Routes

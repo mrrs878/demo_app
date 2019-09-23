@@ -3,29 +3,30 @@ import BScroll, { Position } from 'better-scroll'
 
 //@ts-ignore
 import mScrollStyle from './mScroll.module.less';
+import {posix} from "path";
 
 export interface IScrollProps {
-  direction?: 'vertical'| 'horizental',
+  direction?: 'vertical'| 'horizontal',
   refresh?: boolean,
   pullDownLoading?: boolean,
   pullUpLoading?: boolean,
   bounceTop?: boolean,
   bounceBottom?: boolean,
   click?: boolean
-  pullUp?: () => void,
-  pullDown?: () => void,
+  onPullUp?: (y: number) => void,
+  onPullDown?: (y: number) => void,
   onScroll?: (scroll: BScroll) => void
 }
 
 const Scroll: React.FC<IScrollProps> = forwardRef((props, ref) =>{
-  const [ bScroll, setBScroll ] = useState()
-    const scrollContainerRef = useRef(null)
-    const { direction, click, refresh,  bounceTop, bounceBottom } = props
-    const { pullUp, pullDown, onScroll } = props
-  
+  const [ bScroll, setBScroll ] = useState();
+    const scrollContainerRef = useRef(null);
+    const { direction, click, refresh,  bounceTop, bounceBottom } = props;
+    const { onPullUp, onPullDown, onScroll } = props;
+
     useEffect(() => {
       const scroll = new BScroll(scrollContainerRef.current || '', {
-        scrollX: direction === "horizental",
+        scrollX: direction === "horizontal",
         scrollY: direction === "vertical",
         probeType: 3,
         click: click,
@@ -33,44 +34,44 @@ const Scroll: React.FC<IScrollProps> = forwardRef((props, ref) =>{
           top: bounceTop,
           bottom: bounceBottom
         }
-      })
-      setBScroll(scroll)
+      });
+      setBScroll(scroll);
       return () => setBScroll(null)
     }, []);
-  
+
     useEffect(() => {
       if(!bScroll || !onScroll) return;
       bScroll.on('scroll', (scroll: BScroll) => {
         onScroll(scroll)
-      })
+      });
       return () => bScroll.off('scroll')
-    }, [onScroll, bScroll])
-  
+    }, [onScroll, bScroll]);
+
     useEffect(() => {
-      if(!bScroll || !pullUp) return;
+      if(!bScroll || !onPullUp) return;
       bScroll.on('scrollEnd', () => {
         if(bScroll.y <= bScroll.maxScrollY + 100){
-          pullUp();
+          onPullUp(bScroll.y);
         }
-      })
+      });
       return () => bScroll.off('scrollEnd')
-    }, [pullUp, bScroll])
-  
+    }, [onPullUp, bScroll]);
+
     useEffect(() => {
-      if(!bScroll || !pullDown) return;
+      if(!bScroll || !onPullDown) return;
       bScroll.on('touchEnd', (pos: Position) => {
         if(pos.y > 50) {
-          pullDown()
+          onPullDown(pos.y)
         }
-      })
+      });
       return () => bScroll.off('touchEnd')
-    }, [pullDown, bScroll])
-  
-  
+    }, [onPullDown, bScroll]);
+
+
     useEffect(() => {
       if(refresh && bScroll) bScroll.refresh()
     });
-  
+
     useImperativeHandle(ref, () => ({
       refresh() {
         if(bScroll) {
@@ -83,14 +84,14 @@ const Scroll: React.FC<IScrollProps> = forwardRef((props, ref) =>{
           return bScroll;
         }
       }
-    }))
-  
+    }));
+
     return (
       <div ref={ scrollContainerRef } className={ mScrollStyle.content }>
         { props.children }
       </div>
     )
-})
+});
 
 Scroll.defaultProps = {
   direction: 'vertical',
@@ -100,7 +101,7 @@ Scroll.defaultProps = {
   pullUpLoading: false,
   bounceBottom: true,
   bounceTop: true
-}
+};
 
 
 export default Scroll
