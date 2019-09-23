@@ -57,8 +57,8 @@
   background-color: #f00;
   position: fixed;
   bottom: 3.2rem;
-  left: 0.1rem;
-  right: 0.1rem;
+  left: 0rem;
+  right: 0rem;
   border-radius: 5px;
   overflow-x: hidden;
 }
