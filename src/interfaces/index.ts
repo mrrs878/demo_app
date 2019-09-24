@@ -1,28 +1,26 @@
+//recommend
+export interface IAl {
+  id: number,
+  name: string,
+  picUrl: string
+}
 export interface ITrack {
   name: string,
   id: number,
   ar: Array<ISinger>,
+  al: IAl,
   dt: string
 }
-
 export interface IPlayList {
   name: string,
   playCount: number,
   coverImgUrl: string
   tracks: Array<ITrack>
 }
-
-export interface IListDetailRes {
-  code: number,
-  relatedVideos: object,
-  playlist: IPlayList
-}
-
 export interface IBanner {
   imageUrl: string,
   url: string
 }
-
 export interface IRecommendList {
   id: string,
   type: number,
@@ -36,12 +34,25 @@ export interface IRecommendList {
   alg: string
 }
 
-export interface ISong {
+export interface IPlayer {
   id: number,
   url: string,
   type: string,
   size: number,
-  level: string
+  level: string,
+  picUrl: string
+}
+
+export interface ISingerHotSong {
+  ar: Array<{ id: number, name: string }>,
+  al: {
+    id: number,
+    name: string,
+    picUrl: string
+  },
+  id: number,
+  dt: number,
+  name: string
 }
 
 export interface ISinger {

@@ -10,3 +10,7 @@ export interface IGetSingers {
   cat: string,
   initial: string
 }
+
+export interface IGetSingerSongs {
+  id: string
+}

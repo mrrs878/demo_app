@@ -29,9 +29,21 @@
     z-index: 1;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    .songTitle {
+      position: absolute;
+      top: 0;
+      left: 0.1rem;
+      height: 1rem;
+      line-height: 1rem;
+      display: flex;
+      align-items: center;
+      &Span {
+        margin-left: 0.35rem;
+      }
+    }
   }
   .scrollContainer {
-    padding: 0.5rem 0.2rem 0;
+    padding: 1rem 0.2rem 0;
     box-sizing: border-box;
     position: absolute;
     z-index: 2;
@@ -40,5 +52,30 @@
     right: 0;
     bottom: 0;
     background-color: #00000000;
+    .song {
+      display: flex;
+      align-items: center;
+      font-size: 0.32rem;
+      &Info {
+        margin-left: 0.8rem;
+        color: #ccc;
+        font-size: 0.24rem;
+        &Signer {
+          color: #000;
+          font-size: 0.32rem;
+        }
+      }
+      position: relative;
+      &:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        transform: scaleY(0.5);
+        content: "";
+        background-color: #eee;
+      }
+    }
   }
 }

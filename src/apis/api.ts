@@ -2,7 +2,7 @@ import ajax from '../utils/ajax'
 
 import * as apiParams from './apiParams'
 
-const BASE_URL = 'http://localhost:4000'
+const BASE_URL = 'http://192.168.5.210:4000'
 const PERSONALIZED_URL = `${BASE_URL}/personalized`
 
 export const getBanners = () => ajax.get(`${BASE_URL}/banner`)
@@ -12,3 +12,5 @@ export const getListDetail = (params: apiParams.IGetListDetail) => ajax.get(`${B
 export const getSongURL = (params: apiParams.IGetSongURL) => ajax.get(`${BASE_URL}/song/url?id=${params.id}`)
 
 export const gertSingers = (params: apiParams.IGetSingers) => ajax.get(`${BASE_URL}/artist/list?cat=${params.cat}&initial=${params.initial}`)
+
+export const getSingerSongs = (params: apiParams.IGetSingerSongs) => ajax.get(`${BASE_URL}/artists?id=${params.id}`)

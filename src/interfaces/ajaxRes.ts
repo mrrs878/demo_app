@@ -1,4 +1,4 @@
-import { IBanner, IRecommendList, ISong, ISinger } from './index'
+import {IBanner, IRecommendList, IPlayer, ISinger, ISingerHotSong, IPlayList} from './index'
 
 export interface IBannerRes {
   banners: Array<IBanner>,
@@ -11,13 +11,26 @@ export interface IRecommendListRes {
   result: Array<IRecommendList>
 }
 
+
+export interface IListDetailRes {
+  code: number,
+  relatedVideos: object,
+  playlist: IPlayList
+}
 export interface ISongRes {
   code: number,
-  data: Array<ISong>
+  data: Array<IPlayer>
 }
 
 export interface ISingersRes {
   code: number,
   more: boolean,
   artists: Array<ISinger>
+}
+
+export interface ISingerSongsRes {
+  code: number
+  artist: ISinger,
+  hotSongs: Array<ISingerHotSong>,
+  more: boolean
 }

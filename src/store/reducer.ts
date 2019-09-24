@@ -1,16 +1,24 @@
-import {Singer} from "./model";
-import * as actions from './action'
+import { Singer, Song, PlayList } from "./model";
 import * as types from './type'
 
 const DEFAULT_STATE = {
   singer: new Singer(),
-  singerArtists: []
+  singerArtists: [],
+  song: new Song(),
+  playList: new PlayList()
 };
 
-function rootReducer(state = DEFAULT_STATE, action: actions.IAction) {
+export interface IAction {
+  type: types.allType,
+  data?: any
+}
+
+function rootReducer(state = DEFAULT_STATE, action: IAction) {
   switch(action.type) {
     case types.SET_SINGER:
-      return Object.assign(state, { singer: action.data })
+      return Object.assign(state, { singer: action.data });
+    case types.SET_SONG:
+      return Object.assign(state, { song: action.data });
     default:
       return state
   }

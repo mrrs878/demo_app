@@ -1,11 +1,10 @@
 import React, {createContext, Dispatch, useReducer} from 'react'
 
-import { rootReducer, DEFAULT_STATE } from './reducer'
-import * as actions from './action'
+import { rootReducer, DEFAULT_STATE, IAction } from './reducer'
 
 interface IContext {
   state: typeof DEFAULT_STATE,
-  dispatch?: Dispatch<actions.IAction>
+  dispatch?: Dispatch<IAction>
 }
 const RootContext = createContext<IContext>({ state: DEFAULT_STATE});
 
@@ -19,5 +18,5 @@ const RootStore: React.FC<IRootStoreProps> = props => {
     </RootContext.Provider>
   )
 };
-export { RootContext, actions }
+export { RootContext }
 export default RootStore
