@@ -1,30 +1,30 @@
-import React, {useState, useEffect, useRef, useContext} from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import React, {useContext, useEffect, useRef, useState} from 'react'
+import {RouteComponentProps, withRouter} from 'react-router-dom'
+import { Toast } from 'antd-mobile'
 
 import MHeader from '../../components/m-header/MHeader'
 import MIcon from '../../components/m-icon/MIcon'
-import MTimeline  from '../../components/m-timeline/MTimeline'
+import MTimeline from '../../components/m-timeline/MTimeline'
 import PlayList from '../../components/play-list/PlayList'
-import { getSongURL } from '../../apis/api'
-import { IGetSongURL } from '../../apis/apiParams'
-import { AxiosResponse } from 'axios'
-import { ISongRes } from '../../interfaces/ajaxRes'
-import { IPlayer } from '../../interfaces'
-import { Player } from '../../store/model'
-import { RootContext } from '../../store'
-
+import {getSongURL} from '../../apis/api'
+import {IGetSongURL} from '../../apis/apiParams'
+import {AxiosResponse} from 'axios'
+import {ISongRes} from '../../interfaces/ajaxRes'
+import {IPlayer} from '../../interfaces'
+import {PlayMode} from '../../constant'
+import {models, RootContext, types} from '../../store'
 //@ts-ignore
 import playerStyle from './player.module.less'
+import {SET_PLAY_STATUS} from "../../store/type";
 
 interface IPlayerProps extends RouteComponentProps<IGetSongURL> {}
 
 const PlayerCom: React.FC<IPlayerProps> = props => {
-  const [ player, setPlayer ] = useState<IPlayer>(new Player());
-  const [ playerStatus, setPlayerStatus ] = useState(false);
+  const [ player, setPlayer ] = useState<IPlayer>(new models.Player());
   const [ playTime, setPlayTime ] = useState(0);
   const [ playList_f, setPlayList_f ] = useState<-1 | 1>(-1);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { state } = useContext(RootContext);
+  const { state, dispatch } = useContext(RootContext);
 
   useEffect(() => {
     getSongURL({ id: props.match.params.id }).then((e: AxiosResponse<ISongRes>) => {
@@ -40,16 +40,24 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
         setPlayTime(Math.ceil(e.target.currentTime))
       };
       audioRef.current.onended = () => {
-        setPlayerStatus(false)
+        //@ts-ignore
+        dispatch({ type: SET_PLAY_STATUS, data: false });
       };
     }
   });
+  useEffect(() => {
+    if(audioRef.current) {
+      if(state.playStatus) audioRef.current.play();
+      else audioRef.current.pause();
+    }
+  }, [state.playStatus]);
 
   function toggleAudioStatus() {
     if(audioRef.current) {
-      if(!playerStatus) audioRef.current.play();
+      if(!state.playStatus) audioRef.current.play();
       else audioRef.current.pause();
-      setPlayerStatus(!playerStatus)
+      //@ts-ignore
+      dispatch({ type: SET_PLAY_STATUS, data: !state.playStatus });
     }
   }
 
@@ -58,7 +66,8 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
       audioRef.current.currentTime = time;
       audioRef.current.play();
       setPlayTime(Math.floor(time));
-      setPlayerStatus(true)
+      //@ts-ignore
+      dispatch({ type: SET_PLAY_STATUS, data: true });
     }
   }
 
@@ -71,37 +80,44 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
 
   function handleTimelineRef(ref: any) {}
 
-  function togglePlayList() {
+  function handleTogglePlayList() {
     setPlayList_f(1)
+  }
+  function handleTogglePlayMode() {
+    let newMode = PlayMode.onByOne;
+    newMode = state.playMode === PlayMode.onByOne ? PlayMode.circleOne : PlayMode.onByOne;
+    Toast.info(state.playMode === PlayMode.onByOne ? '单曲循环' : '顺序播放', 1);
+    //@ts-ignore
+    dispatch({ type: types.SET_PLAY_MODE, data: newMode })
   }
 
   return (
     <div className={ playerStyle.content }>
-      <MHeader bgColor="#00000000" titleColor="#666" titlePosition="center"/>
+      <MHeader bgColor="rgba(0, 0, 0, 0)" titleColor="#666" titlePosition="center"/>
       <div className={playerStyle.bg} style={{ backgroundImage: `url(${ player.picUrl })` }}/>
       <div className={ playerStyle.playerContainer }>
         <audio ref={audioRef} src={ player.url }/>
-        {/*<audio ref={audioRef} src="http://m7.music.126.net/20190924115409/a3f65aa376eece96069926dafa28bf80/ymusic/d9ee/21c2/4fae/cb8b79ebc773ae858bb7f31a3e286261.flac"/>*/}
+        {/*<audio ref={audioRef} src="http://m8.music.126.net/20190925100255/9bdbcc8d4c1623fcd8b8167edda96896/ymusic/d9ee/21c2/4fae/cb8b79ebc773ae858bb7f31a3e286261.flac"/>*/}
         <div className={playerStyle.pic} style={{
           animationTimingFunction: '',
-          animationPlayState: playerStatus ? 'running' : 'paused',
+          animationPlayState: state.playStatus ? 'running' : 'paused',
           backgroundImage: `url(${ player.picUrl })`
         }}/>
         <div className={ playerStyle.controlContainer }>
-          <MTimeline status={ playerStatus } onRef={ handleTimelineRef } duration={248 * 1000} lineColor={'#f00'} adjust={ adjustAnimation } />
+          <MTimeline status={ state.playStatus } onRef={ handleTimelineRef } duration={ audioRef.current ? audioRef.current.duration : 0 } process={ playTime / (audioRef.current ? audioRef.current.duration : 1) * 100 } lineColor={'#f00'} adjust={ adjustAnimation } />
           <div className={ playerStyle.playTime }>
             <p>{ formatPlayTime(playTime) }</p>
             <p>{ formatPlayTime( audioRef.current ? audioRef.current.duration : 0) }</p>
           </div>
           <div className={ playerStyle.control }>
-            <MIcon name="icon-playAll" color="#666" size={40} />
+            <MIcon name={ state.playMode } color="#666" size={40} onClick={ handleTogglePlayMode } />
             <MIcon name="icon-previousAudio" color="#666" size={40} />
-            <MIcon name={ playerStatus ? 'icon-pauseAudio' : 'icon-startAudio' } color="#666" size={40} onClick={ toggleAudioStatus } />
+            <MIcon name={ state.playStatus ? 'icon-pauseAudio' : 'icon-startAudio' } color="#666" size={40} onClick={ toggleAudioStatus } />
             <MIcon name="icon-nextAudio" color="#666" size={40} />
-            <MIcon name="icon-audioList" color="#666" size={40} onClick={ togglePlayList } />
+            <MIcon name="icon-audioList" color="#666" size={40} onClick={ handleTogglePlayList } />
           </div>
         </div>
-        <PlayList zIndex={ playList_f } list={ state.playList }/>
+        <PlayList zIndex={ playList_f } onClose={() => setPlayList_f(-1)}/>
       </div>
     </div>
   )

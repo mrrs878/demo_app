@@ -1,11 +1,17 @@
-import { Singer, Song, PlayList } from "./model";
+import {Singer, Song, PlayList, Player} from "./model";
 import * as types from './type'
+
+import { PlayMode } from '../constant'
 
 const DEFAULT_STATE = {
   singer: new Singer(),
   singerArtists: [],
   song: new Song(),
-  playList: new PlayList()
+  playingIndex: 0,
+  playList: new PlayList(),
+  playMode: PlayMode.onByOne,
+  playStatus: false,
+  player: new Player()
 };
 
 export interface IAction {
@@ -16,9 +22,17 @@ export interface IAction {
 function rootReducer(state = DEFAULT_STATE, action: IAction) {
   switch(action.type) {
     case types.SET_SINGER:
-      return Object.assign(state, { singer: action.data });
+      return Object.assign({}, state, { singer: action.data });
     case types.SET_SONG:
-      return Object.assign(state, { song: action.data });
+      return Object.assign({}, state, { song: action.data });
+    case types.SET_PLAYING_INDEX:
+      return Object.assign({}, state, { playingIndex: action.data });
+    case types.SET_PLAY_LIST:
+      return Object.assign({}, state, { playList: action.data });
+    case types.SET_PLAY_STATUS:
+      return Object.assign({}, state, { playStatus: action.data });
+    case types.SET_PLAY_MODE:
+      return Object.assign({}, state, { playMode: action.data });
     default:
       return state
   }

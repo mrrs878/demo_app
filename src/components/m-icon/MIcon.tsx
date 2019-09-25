@@ -13,10 +13,10 @@ interface IMIconProps {
 
 const MIcon: React.FC<IMIconProps> = (props) => (
   <div className={`${ mIConStyle.svgContainer } ${ props.className }`} style={{ fill: props.color }} onClick={ props.onClick }>
-    <svg className={ mIConStyle.svgIcon } aria-hidden={ true } style={{height: `${props.size}px`, lineHeight: `${props.size}px`, width: `${props.size}px`}}>
+    <svg className={ mIConStyle.svgIcon } aria-hidden={ true } style={{fontSize: `${props.size}px`, width: `${props.size}px`}}>
       <use xlinkHref={`#${props.name}`}/>
     </svg>
-    <p className={ mIConStyle.text } style={{ fontSize: `${props.size}px`, color: props.color }}>{ props.children}</p>
+    <span className={ mIConStyle.text } style={{ fontSize: `${props.size}px`, color: props.color, margin: 0 }}>{ props.children }</span>
   </div>
 );
 

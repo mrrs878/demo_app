@@ -66,3 +66,8 @@ export interface ISinger {
   picUrl: string
   name: string
 }
+
+export interface IPlayer {
+  url: string,
+  status: boolean
+}

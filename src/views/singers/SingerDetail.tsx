@@ -2,7 +2,7 @@ import React, {useEffect, useContext, useState, useCallback, useRef} from "react
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import BScroll from 'better-scroll'
 
-import { RootContext } from '../../store'
+import {RootContext, types} from '../../store'
 import MHeader from '../../components/m-header/MHeader'
 import MScroll from '../../components/m-scroll/MScroll'
 import MIcon from '../../components/m-icon/MIcon'
@@ -18,7 +18,7 @@ import {AxiosResponse} from "axios";
 interface ISingerDetailProps extends RouteComponentProps<IGetSingerSongs> {}
 
 const SingerDetail: React.FC<ISingerDetailProps> = props => {
-  const { state } = useContext(RootContext);
+  const { state, dispatch } = useContext(RootContext);
   const imgRef= useRef<HTMLDivElement>(null);
   const scrollBgRef = useRef<HTMLDivElement>(null);
   const [ singerSongs, setSingerSongs ] = useState<Array<ISingerHotSong>>([]);
@@ -45,9 +45,20 @@ const SingerDetail: React.FC<ISingerDetailProps> = props => {
       }
     }
   }, []);
+
+  function handleToPlayer(item: ISingerHotSong, index: number) {
+    props.history.push(`/player/${ item.id }/${ item.dt }`);
+    // @ts-ignore
+    dispatch({ type: types.SET_PLAY_LIST, data: { tracks: singerSongs } });
+    // @ts-ignore
+    dispatch({ type: types.SET_SONG, data: singerSongs[index] });
+    // @ts-ignore
+    dispatch({ type: types.SET_PLAYING_INDEX, data: index })
+  }
+
   return (
       <div className={ singerDetailStyle.content }>
-        <MHeader titleColor="#fff" bgColor="#00000000">{ state.singer.name }</MHeader>
+        <MHeader titleColor="#fff" bgColor="rgba(0, 0, 0, 0)">{ state.singer.name }</MHeader>
         <div ref={ imgRef } className={singerDetailStyle.bg} style={{ backgroundImage: `url(${state.singer.picUrl})` }}>
           <div className={singerDetailStyle.filter}/>
         </div>
@@ -62,7 +73,7 @@ const SingerDetail: React.FC<ISingerDetailProps> = props => {
             <div>
               {
                 singerSongs.map((item, index) => (
-                  <div key={ index } className={ singerDetailStyle.song } onClick={ () => props.history.push(`/player/${ item.id }/${ item.dt }`) }>
+                  <div key={ index } className={ singerDetailStyle.song } onClick={ () => handleToPlayer(item, index) }>
                     <span>{ index + 1 }</span>
                     <div className={ singerDetailStyle.songInfo }>
                       <p className={ singerDetailStyle.songInfoSigner }>{ item.name }</p>
