@@ -1,15 +1,13 @@
-import React, { useRef, useContext } from 'react';
+import React from 'react';
 
 import Routes from './routes/index'
-import RootStore, {RootContext} from "./store";
+import RootStore from "./store";
+import MAudio from './components/m-audio/MAudio'
 
 const App: React.FC = () => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const { state } = useContext(RootContext);
-
   return (
     <RootStore>
-      <audio ref={audioRef} src={ state.playerUrl }/>
+      <MAudio />
       <Routes />
     </RootStore>
   );

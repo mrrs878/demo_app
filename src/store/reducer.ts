@@ -7,7 +7,7 @@ const DEFAULT_STATE = {
   singer: new Singer(),
   singerArtists: [],
   song: new Song(),
-  playingIndex: 0,
+  playingIndex: NaN,
   playList: new PlayList(),
   playMode: PlayMode.onByOne,
   playStatus: false,
@@ -33,6 +33,8 @@ function rootReducer(state = DEFAULT_STATE, action: IAction) {
       return Object.assign({}, state, { playStatus: action.data });
     case types.SET_PLAY_MODE:
       return Object.assign({}, state, { playMode: action.data });
+    case types.SET_PLAYER:
+      return Object.assign({}, state, { player: Object.assign({}, state.player, action.data) });
     default:
       return state
   }

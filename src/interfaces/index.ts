@@ -34,15 +34,6 @@ export interface IRecommendList {
   alg: string
 }
 
-export interface IPlayer {
-  id: number,
-  url: string,
-  type: string,
-  size: number,
-  level: string,
-  picUrl: string
-}
-
 export interface ISingerHotSong {
   ar: Array<{ id: number, name: string }>,
   al: {
@@ -69,5 +60,8 @@ export interface ISinger {
 
 export interface IPlayer {
   url: string,
-  status: boolean
+  status: boolean,
+  picUrl: string,
+  currentTime: number,
+  duration: number
 }

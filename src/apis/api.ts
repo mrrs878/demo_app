@@ -2,7 +2,7 @@ import ajax from '../utils/ajax'
 
 import * as apiParams from './apiParams'
 
-const BASE_URL = 'http://192.168.5.210:4000'
+const BASE_URL = 'http://localhost:4000'
 const PERSONALIZED_URL = `${BASE_URL}/personalized`
 
 export const getBanners = () => ajax.get(`${BASE_URL}/banner`)

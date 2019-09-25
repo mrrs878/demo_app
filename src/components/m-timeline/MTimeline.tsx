@@ -5,7 +5,6 @@ import mTimelineStyle from './mTimeline.module.less'
 
 export interface ITimelineProps {
   process: number,
-  duration: number,
   lineColor: string,
   status?: boolean,
   onRef?: (ref: any) => void,
@@ -18,7 +17,7 @@ const Timeline: React.FC<ITimelineProps> = props => {
 
   function handleAdjustTime(e: React.MouseEvent<HTMLDivElement, MouseEvent>)  {
     if(animationRef.current) {
-      let time = Math.floor(e.clientX / window.screen.width * props.duration);
+      let time = Math.floor(e.clientX / window.screen.width);
       animationRef.current.style.transform = `translateX(${time}%)`;
       props.adjust && props.adjust(time)
     }

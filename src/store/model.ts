@@ -41,20 +41,18 @@ class Song implements ITrack {
 }
 
 class Player implements IPlayer {
-  id: number;
-  level: string;
-  picUrl: string;
-  size: number;
-  type: string;
+  status: boolean;
   url: string;
+  picUrl: string;
+  currentTime: number;
+  duration: number;
 
-  constructor(id: number = NaN, level: string = '', picUrl: string = '', size: number = NaN, type: string = '', url: string = '') {
-    this.id = id;
-    this.level = level;
-    this.picUrl = picUrl;
-    this.size = size;
-    this.type = type;
+  constructor(status: boolean = false, url: string = '', picUrl: string = '', currentTime: number = 0, duration: number = 0) {
+    this.status = status;
     this.url = url;
+    this.picUrl = picUrl;
+    this.currentTime = currentTime;
+    this.duration = duration;
   }
 }
 
