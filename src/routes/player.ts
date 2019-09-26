@@ -9,7 +9,7 @@ const Player = loadable({
 })
 
 const routes: Array<IRouteConfig> = [
-  { path: '/player/:id', component: Player, exact: false }
+  { path: '/footer/:id', component: Player, exact: false }
 ]
 
 export default routes

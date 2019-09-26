@@ -53,7 +53,7 @@ const SingerDetail: React.FC<ISingerDetailProps> = props => {
     // @ts-ignore
     dispatch({ type: types.SET_SONG, data: singerSongs[index] });
     // @ts-ignore
-    dispatch({ type: types.SET_PLAYING_INDEX, data: index })
+    dispatch({ type: types.SET_PLAYING_INDEX, data: index });
   }
 
   return (

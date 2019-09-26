@@ -186,7 +186,7 @@ const Singers: React.FC<ISingersProps> = props => {
   const [ activeType, setActiveType ] = useState<number>(0);
   const [ activeAlpha, setActiveAlpha ] = useState<number>(-1);
   const [ singers, setSingers ] = useState<Array<ISinger>>(new Array<ISinger>());
-  const { state, dispatch }  = useContext(RootContext);
+  const { dispatch }  = useContext(RootContext);
 
   useEffect(() => {
     gertSingers({ cat: categoryTypes[activeType].key, initial: activeAlpha === -1 ? '' : alphaTypes[activeAlpha].key }).then((res: AxiosResponse<ISingersRes>) => {
