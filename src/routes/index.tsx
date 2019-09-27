@@ -22,7 +22,9 @@ const routes = [
   ...singersRoutes
 ];
 
-const Routes = () => {
+interface IIndexProps {}
+
+const Routes: React.FC<IIndexProps> = props => {
   return (
     <BrowserRouter>
       <Switch>
@@ -32,6 +34,7 @@ const Routes = () => {
           ))
         }
       </Switch>
+      { props.children }
     </BrowserRouter>
   )
 };
