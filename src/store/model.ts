@@ -1,6 +1,7 @@
-import {ISinger, ITrack, IAl, IPlayer, IPlayList} from '../interfaces'
+import {IAl, IPlayer, IPlayList, IArtist, ITrack} from '../interfaces'
+import {PlayMode} from "../constant";
 
-class Singer implements ISinger {
+class Singer implements IArtist {
   albumSize: number;
   followed: boolean;
   id: number;
@@ -26,12 +27,12 @@ class Singer implements ISinger {
 
 class Song implements ITrack {
   al: IAl;
-  ar: Array<ISinger>;
+  ar: Array<IArtist>;
   dt: string;
   id: number;
   name: string;
 
-  constructor(al: IAl = { id:NaN, name: '', picUrl: '' }, ar: Array<ISinger> = [], dt: string = '', id: number = NaN, name: string = '') {
+  constructor(al: IAl = { id:NaN, name: '', picUrl: '' }, ar: Array<IArtist> = [], dt: string = '', id: number = NaN, name: string = '') {
     this.al = al;
     this.ar = ar;
     this.dt = dt;
@@ -46,13 +47,15 @@ class Player implements IPlayer {
   picUrl: string;
   currentTime: number;
   duration: number;
+  mode: PlayMode;
 
-  constructor(status: boolean = false, url: string = '', picUrl: string = '', currentTime: number = 0, duration: number = 0) {
+  constructor(status: boolean = false, url: string = '', picUrl: string = '', currentTime: number = 0, duration: number = 0, mode: PlayMode = PlayMode.onByOne) {
     this.status = status;
     this.url = url;
     this.picUrl = picUrl;
     this.currentTime = currentTime;
     this.duration = duration;
+    this.mode = mode
   }
 }
 

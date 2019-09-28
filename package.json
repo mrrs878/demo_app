@@ -30,7 +30,7 @@
     "typescript": "3.6.3"
   },
   "scripts": {
-    "start": "set PORT=8086 && react-app-rewired start",
+    "start": "set PORT=8086 HOST=192.168.5.210 && react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"

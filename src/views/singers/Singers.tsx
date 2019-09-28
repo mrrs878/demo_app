@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import MScroll from '../../components/m-scroll/MScroll'
 import { ISingersRes } from '../../interfaces/ajaxRes'
-import {ISinger} from "../../interfaces";
+import {IArtist} from "../../interfaces";
 import { gertSingers } from '../../apis/api';
 //@ts-ignore
 import singersStyle from './singers.module.less'
@@ -185,7 +185,7 @@ interface ISingersProps extends RouteComponentProps{}
 const Singers: React.FC<ISingersProps> = props => {
   const [ activeType, setActiveType ] = useState<number>(0);
   const [ activeAlpha, setActiveAlpha ] = useState<number>(-1);
-  const [ singers, setSingers ] = useState<Array<ISinger>>(new Array<ISinger>());
+  const [ singers, setSingers ] = useState<Array<IArtist>>(new Array<IArtist>());
   const { dispatch }  = useContext(RootContext);
 
   useEffect(() => {

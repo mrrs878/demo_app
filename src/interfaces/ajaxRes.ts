@@ -1,4 +1,4 @@
-import {IBanner, IRecommendList, IPlayer, ISinger, ISingerHotSong, IPlayList} from './index'
+import {IBanner, IRecommendList, IPlayer, IArtist, ISingerHotSong, IPlayList, ISearchResult} from './index'
 
 export interface IBannerRes {
   banners: Array<IBanner>,
@@ -25,12 +25,31 @@ export interface ISongRes {
 export interface ISingersRes {
   code: number,
   more: boolean,
-  artists: Array<ISinger>
+  artists: Array<IArtist>
 }
 
 export interface ISingerSongsRes {
-  code: number
-  artist: ISinger,
+  code: number,
+  artist: IArtist,
   hotSongs: Array<ISingerHotSong>,
   more: boolean
+}
+
+export interface ILyricRes {
+  code: number;
+  lrc: {
+    lyric: string
+  };
+}
+
+export interface ISearchRes {
+  code: number,
+  result: ISearchResult
+}
+
+export interface ISearchSugRes {
+  code: number,
+  result: {
+    allMatch: Array<{keyword: string}>
+  }
 }

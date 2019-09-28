@@ -13,11 +13,8 @@ export type SET_PLAYING_INDEX = 'SET_PLAYING_INDEX';
 export const SET_PLAY_LIST = 'SET_PLAY_LIST';
 export type SET_PLAY_LIST = typeof SET_PLAY_LIST;
 
-export const SET_PLAY_MODE = 'SET_PLAY_MODE';
-export type SET_PLAY_MODE = typeof SET_PLAY_MODE;
-
-export const SET_PLAY_STATUS = 'SET_PLAY_STATUS';
-export type SET_PLAY_STATUS = typeof SET_PLAY_STATUS;
+export const SET_PLAYING_TIME = 'SET_PLAYING_TIME';
+export type SET_PLAYING_TIME = typeof SET_PLAYING_TIME;
 
 export const SET_PLAYER = 'SET_PLAYER';
 export type SET_PLAYER = typeof SET_PLAYER;
@@ -27,7 +24,6 @@ export type allType =
   SET_RECOMMEND_LIST |
   SET_SONG |
   SET_PLAY_LIST |
-  SET_PLAY_MODE |
   SET_PLAYING_INDEX |
-  SET_PLAY_STATUS |
+  SET_PLAYING_TIME |
   SET_PLAYER

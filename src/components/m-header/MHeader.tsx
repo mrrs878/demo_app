@@ -11,7 +11,9 @@ interface IMHeaderProps extends RouteComponentProps {
   titleColor?: string,
   titlePosition?: 'left' | 'center',
   size?: number,
+  leftIcon?: string,
   leftPath?: string,
+  rightContext?: React.ReactNode,
   onLeftClick?: (next: () => void)  => void,
   onRightClick?: () => void
 }
@@ -25,15 +27,20 @@ const Header: React.FC<IMHeaderProps> = props => {
     if(props.onLeftClick) props.onLeftClick(next);
     else next()
   }
+  function handleRightClick() {
+    props.onRightClick && props.onRightClick()
+  }
+
   return (
     <div className={ mHeaderStyle.content } style={{ backgroundColor: props.bgColor }}>
       <div className={ mHeaderStyle.left } onClick={ handleLeftClick }>
-        <MIcon name="icon-back" color={ props.titleColor } size={ props.size }>{ props.titlePosition === 'center' ? '' : props.children }</MIcon>
+        <MIcon name={ props.leftIcon || 'icon-back' } color={ props.titleColor } size={ props.size }>{ props.titlePosition === 'center' ? '' : props.children }</MIcon>
       </div>
       <div className={ mHeaderStyle.center } style={{ color: props.titleColor, fontSize: props.size }}>
         { props.titlePosition === 'left' ? '' : props.children }
       </div>
-      <div className={ mHeaderStyle.right } onClick={ () => props.onRightClick }>
+      <div className={ mHeaderStyle.right } onClick={ handleRightClick }>
+        { props.rightContext }
       </div>
     </div>
   );

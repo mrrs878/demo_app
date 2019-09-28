@@ -6,15 +6,15 @@ import { IRouteConfig } from './index'
 const Main = loadable({
   loader: () => import('../views/main/Main'),
   loading:Loading
-})
-const Recommend = loadable({
-  loader: () => import('../views/recommend/Recommend'),
+});
+const Search = loadable({
+  loader: () => import('../views/main/Search'),
   loading: Loading
-})
+});
 
 const routes: Array<IRouteConfig> = [
   { path: '/main', component: Main, exact: true },
-  { path: '/main/recommend', component: Recommend, exact: true }
-]
+  { path: '/main/search', component: Search, exact: false }
+];
 
 export default routes

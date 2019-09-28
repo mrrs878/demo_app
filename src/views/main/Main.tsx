@@ -1,4 +1,5 @@
 import React from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 
 import { Tabs, NavBar, Icon } from 'antd-mobile';
 
@@ -9,6 +10,9 @@ import MIcon from '../../components/m-icon/MIcon'
 
 //@ts-ignore
 import mainStyle from './main.module.less'
+import MHeader from "../../components/m-header/MHeader";
+
+interface IMainProps extends RouteComponentProps {}
 
 const tabs = [
   { title: '推荐' },
@@ -16,19 +20,15 @@ const tabs = [
   { title: '排行榜' }
 ];
 
-const Main = () => {
+const Main: React.FC<IMainProps> = props => {
+  function handleRightClick() {
+    props.history.push('/main/search')
+  }
+
   return (
     <div className={ mainStyle.content }>
-      <NavBar
-        className={ mainStyle.header }
-        mode="light"
-        icon={<MIcon name="icon-menu" />}
-        onLeftClick={() => console.log('onLeftClick')}
-        rightContent={[
-          <Icon key="0" type="search" style={{ marginRight: '16px' }} />
-        ]}
-      >
-      云音悦</NavBar>
+      <MHeader bgColor="#d44439" titleColor="#fff" titlePosition="center" leftIcon="icon-menu" rightContext={[<MIcon name="icon-search"/>]} onRightClick={handleRightClick}>云音悦</MHeader>
+      <div style={{height: '1rem', width: '100%'}}/>
       <div className={ mainStyle.item }>
         <Tabs
           tabBarBackgroundColor="#d44439"
@@ -48,6 +48,6 @@ const Main = () => {
       </div>
   </div>
   )
-}
+};
 
 export default Main

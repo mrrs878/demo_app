@@ -1,12 +1,15 @@
-export interface IGetListDetail { id: string }
+export type IGetListDetail = { id: string }
 
-export interface IGetSongURL { id: string }
+export type IGetSongURL = { id: string }
 
-export interface IGetSingers {
+export type IGetSingers = {
   cat: string,
   initial: string
 }
 
-export interface IGetSingerSongs { id: string }
+export type IGetSingerSongs = { id: string }
 
-export interface IGetLyric { id: string }
+export type IGetLyric = { id: string }
+
+export type IGetSearchSug = { keywords: string }
+export type IGetSearchRes = { keywords: string }

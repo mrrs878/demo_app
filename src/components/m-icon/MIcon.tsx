@@ -8,11 +8,12 @@ interface IMIconProps {
   className?: string,
   color?: string,
   size?: number,
+  visible?: boolean,
   onClick?: () => void
 }
 
 const MIcon: React.FC<IMIconProps> = (props) => (
-  <div className={`${ mIConStyle.svgContainer } ${ props.className }`} style={{ fill: props.color }} onClick={ props.onClick }>
+  <div className={`${ mIConStyle.svgContainer } ${ props.className }`} style={{ fill: props.color, opacity: props.visible ? 1 : 0 }} onClick={ props.onClick }>
     <svg className={ mIConStyle.svgIcon } aria-hidden={ true } style={{fontSize: `${props.size}px`, width: `${props.size}px`}}>
       <use xlinkHref={`#${props.name}`}/>
     </svg>
@@ -22,7 +23,8 @@ const MIcon: React.FC<IMIconProps> = (props) => (
 
 MIcon.defaultProps = {
   name: '',
-  color: '#fff'
+  color: '#fff',
+  visible: true
 };
 
 export default MIcon

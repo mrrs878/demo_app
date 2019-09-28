@@ -1,4 +1,6 @@
 //recommend
+import {PlayMode} from "../constant";
+
 export interface IAl {
   id: number,
   name: string,
@@ -7,7 +9,7 @@ export interface IAl {
 export interface ITrack {
   name: string,
   id: number,
-  ar: Array<ISinger>,
+  ar: Array<IArtist>,
   al: IAl,
   dt: string
 }
@@ -46,7 +48,7 @@ export interface ISingerHotSong {
   name: string
 }
 
-export interface ISinger {
+export interface IArtist {
   id: number,
   img1v1Id: number,
   img1v1Url: string,
@@ -63,5 +65,17 @@ export interface IPlayer {
   status: boolean,
   picUrl: string,
   currentTime: number,
-  duration: number
+  duration: number,
+  mode: PlayMode
+}
+
+export interface ISearchResult {
+  song: {
+    moreText: string,
+    songs: Array<ITrack>
+  },
+  artist: {
+    moreText: string,
+    artists: Array<IArtist>
+  }
 }

@@ -17,8 +17,8 @@ const Timeline: React.FC<ITimelineProps> = props => {
 
   function handleAdjustTime(e: React.MouseEvent<HTMLDivElement, MouseEvent>)  {
     if(animationRef.current) {
-      let time = Math.floor(e.clientX / window.screen.width);
-      animationRef.current.style.transform = `translateX(${time}%)`;
+      let time = e.clientX / window.screen.width;
+      animationRef.current.style.transform = `translateX(${time * 100}%)`;
       props.adjust && props.adjust(time)
     }
   }
