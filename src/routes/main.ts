@@ -13,6 +13,7 @@ const Search = loadable({
 });
 
 const routes: Array<IRouteConfig> = [
+  { path: '/', component: Main, exact: true },
   { path: '/main', component: Main, exact: true },
   { path: '/main/search', component: Search, exact: false }
 ];

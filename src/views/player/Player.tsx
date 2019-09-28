@@ -25,7 +25,6 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
 
   useEffect(() => {
     getLyric({ id: state.song.id.toString() }).then((res: AxiosResponse<ILyricRes>) => {
-      console.log(res.data.lrc.lyric);
       setLyric(res.data.lrc.lyric)
     }).catch(e => console.log(e))
   }, [ state.song.id ]);

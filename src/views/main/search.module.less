@@ -1,0 +1,64 @@
+@import '../../assets/less/global';
+
+.content {
+  height: 100vh;
+  .header {
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+    box-sizing: border-box;
+    .inputContainer {
+      flex: 1;
+      margin: 0 0.2rem;
+      position: relative;
+      .input {
+        height: 0.6rem;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid @mainBgColor;
+        background-color: rgba(0, 0, 0, 0);
+        color: @mainBgColor;
+      }
+      .clearIcon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+      }
+    }
+    .submit {
+      background-color: @mainBgColor;
+      height: 0.6rem;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      margin-left: 0.2rem;
+    }
+  }
+  .scrollContainer {
+    height: calc(100vh - 1.2rem);
+    .suggestOrResContainer {
+      list-style: none;
+      width: 100%;
+      padding: 0;
+      .suggestOrResItem {
+        padding: 0 0.2rem;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        position: relative;
+        &:after {
+          position: absolute;
+          bottom: 0;
+          left: 0.2rem;
+          right: 0.2rem;
+          height: 1px;
+          transform: scaleY(0.5);
+          content: '';
+          background-color: #ccc;
+        }
+      }
+    }
+  }
+}

@@ -49,7 +49,7 @@ const SingerDetail: React.FC<ISingerDetailProps> = props => {
   function handleToPlayer(item: ISingerHotSong, index: number) {
     props.history.push(`/player/${ item.id }/${ item.dt }`);
     // @ts-ignore
-    dispatch({ type: types.SET_PLAY_LIST, data: { tracks: singerSongs } });
+    dispatch({ type: types.SET_PLAY_LIST, data: singerSongs });
     // @ts-ignore
     dispatch({ type: types.SET_SONG, data: singerSongs[index] });
     // @ts-ignore

@@ -3,6 +3,7 @@ import ajax from '../utils/ajax'
 import * as apiParams from './apiParams'
 
 const BASE_URL = 'http://39.108.164.108:9123';
+// const BASE_URL = 'http://192.168.5.210:4000';
 const PERSONALIZED_URL = `${BASE_URL}/personalized`;
 const SEARCH_URL = `${BASE_URL}/search`;
 
