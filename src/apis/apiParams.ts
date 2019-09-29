@@ -1,15 +1,17 @@
-export type IGetListDetail = { id: string }
+export type TGetListDetail = { id: string }
 
-export type IGetSongURL = { id: string }
+export type TGetSongURL = { id: string }
 
-export type IGetSingers = {
+export type TGetSingers = {
   cat: string,
   initial: string
 }
 
-export type IGetSingerSongs = { id: string }
+export type TGetSingerSongs = { id: string }
 
-export type IGetLyric = { id: string }
+export type TGetLyric = { id: string }
 
-export type IGetSearchSug = { keywords: string }
-export type IGetSearchRes = { keywords: string }
+export type TGetSearchSug = { keywords: string }
+export type TGetSearchRes = { keywords: string }
+
+export type TGetSongComment = { id: number, offset: number }

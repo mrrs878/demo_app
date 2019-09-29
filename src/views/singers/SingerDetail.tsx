@@ -9,13 +9,13 @@ import MIcon from '../../components/m-icon/MIcon'
 import { ISingerSongsRes } from '../../interfaces/ajaxRes'
 import { ISingerHotSong } from '../../interfaces'
 import { getSingerSongs } from '../../apis/api'
-import { IGetSingerSongs } from '../../apis/apiParams'
+import { TGetSingerSongs } from '../../apis/apiParams'
 
 //@ts-ignore
 import singerDetailStyle from './singerDetail.module.less'
 import {AxiosResponse} from "axios";
 
-interface ISingerDetailProps extends RouteComponentProps<IGetSingerSongs> {}
+interface ISingerDetailProps extends RouteComponentProps<TGetSingerSongs> {}
 
 const SingerDetail: React.FC<ISingerDetailProps> = props => {
   const { state, dispatch } = useContext(RootContext);
@@ -48,11 +48,8 @@ const SingerDetail: React.FC<ISingerDetailProps> = props => {
 
   function handleToPlayer(item: ISingerHotSong, index: number) {
     props.history.push(`/player/${ item.id }/${ item.dt }`);
-    // @ts-ignore
     dispatch({ type: types.SET_PLAY_LIST, data: singerSongs });
-    // @ts-ignore
     dispatch({ type: types.SET_SONG, data: singerSongs[index] });
-    // @ts-ignore
     dispatch({ type: types.SET_PLAYING_INDEX, data: index });
   }
 

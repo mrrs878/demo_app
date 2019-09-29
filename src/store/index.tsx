@@ -6,9 +6,9 @@ import * as models from './model'
 
 interface IContext {
   state: typeof DEFAULT_STATE,
-  dispatch?: Dispatch<IAction>
+  dispatch: Dispatch<IAction>
 }
-const RootContext = createContext<IContext>({ state: DEFAULT_STATE});
+const RootContext = createContext<IContext>({ state: DEFAULT_STATE, dispatch: value => {}});
 
 interface IRootStoreProps {}
 const RootStore: React.FC<IRootStoreProps> = props => {

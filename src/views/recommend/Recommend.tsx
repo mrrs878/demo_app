@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { Carousel } from 'antd-mobile'
+import LazyLoad from "react-lazyload"
 
 import { getBanners, getRecommendList } from '../../apis/api'
 import { AxiosResponse } from 'axios'

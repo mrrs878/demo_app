@@ -197,7 +197,6 @@ const Singers: React.FC<ISingersProps> = props => {
 
   function handleSingerClick(index: number, id: number) {
     props.history.push(`/singerDetail/${ id }`);
-    // @ts-ignore
     dispatch({ type: types.SET_SINGER, data: singers[index] })
   }
 

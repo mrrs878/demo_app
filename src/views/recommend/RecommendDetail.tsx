@@ -8,18 +8,18 @@ import MIcon from '../../components/m-icon/MIcon'
 import { getListDetail } from '../../apis/api'
 import { IPlayList, ITrack } from '../../interfaces'
 import { IListDetailRes } from '../../interfaces/ajaxRes'
-import { IGetListDetail } from '../../apis/apiParams'
+import { TGetListDetail } from '../../apis/apiParams'
 import { Song } from '../../store/model'
 import {RootContext} from "../../store";
 import * as types from '../../store/type'
 //@ts-ignore
 import recommendDetailStyle from './recommendDetail.module.less'
 
-interface IRecommendDetailProps extends RouteComponentProps<IGetListDetail> {}
+interface IRecommendDetailProps extends RouteComponentProps<TGetListDetail> {}
 const RecommendDetail: React.FC<IRecommendDetailProps> = (props) => {
   const [ listId, setListID ] = useState('');
   const [ listDetail, setListDetail ] = useState<IPlayList>();
-  const { state, dispatch } = useContext(RootContext);
+  const { dispatch } = useContext(RootContext);
   useEffect(() => {
     setListID(props.match.params.id)
   }, [ props.match.params.id ]);
@@ -36,7 +36,6 @@ const RecommendDetail: React.FC<IRecommendDetailProps> = (props) => {
   function handleToPlayer(item: ITrack) {
     props.history.push(`/player/${ item.id }/${ item.dt }`);
     let song = new Song({ name: item.name, id: item.id, picUrl: (listDetail ? listDetail.coverImgUrl : '') });
-    //@ts-ignore
     dispatch({ type: types.SET_SONG, data: song })
   }
 

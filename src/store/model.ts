@@ -1,5 +1,5 @@
 import {IAl, IPlayer, IPlayList, IArtist, ITrack} from '../interfaces'
-import {PlayMode} from "../constant";
+import {EPlayMode} from "../constant";
 
 class Singer implements IArtist {
   albumSize: number;
@@ -47,9 +47,9 @@ class Player implements IPlayer {
   picUrl: string;
   currentTime: number;
   duration: number;
-  mode: PlayMode;
+  mode: EPlayMode;
 
-  constructor(status: boolean = false, url: string = '', picUrl: string = '', currentTime: number = 0, duration: number = 0, mode: PlayMode = PlayMode.onByOne) {
+  constructor(status: boolean = false, url: string = '', picUrl: string = '', currentTime: number = 0, duration: number = 0, mode: EPlayMode = EPlayMode.onByOne) {
     this.status = status;
     this.url = url;
     this.picUrl = picUrl;

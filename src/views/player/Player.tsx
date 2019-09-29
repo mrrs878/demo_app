@@ -7,16 +7,15 @@ import MIcon from '../../components/m-icon/MIcon'
 import MTimeline from '../../components/m-timeline/MTimeline'
 import MLyric from "../../components/m-lyric/MLyric"
 import PlayList from '../../components/play-list/PlayList'
-import { IGetSongURL } from '../../apis/apiParams'
+import { TGetSongURL } from '../../apis/apiParams'
 import {getLyric} from "../../apis/api";
-import {PlayMode} from '../../constant'
+import {EPlayMode} from '../../constant'
 import { RootContext, types} from '../../store'
-//@ts-ignore
-import playerStyle from './player.module.less'
 import {AxiosResponse} from "axios";
 import {ILyricRes} from "../../interfaces/ajaxRes";
+const playerStyle = require('./player.module.less');
 
-interface IPlayerProps extends RouteComponentProps<IGetSongURL> {}
+interface IPlayerProps extends RouteComponentProps<TGetSongURL> {}
 
 const PlayerCom: React.FC<IPlayerProps> = props => {
   const [ playList_f, setPlayList_f ] = useState<-1 | 1>(-1);
@@ -30,14 +29,11 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
   }, [ state.song.id ]);
 
   function toggleAudioStatus() {
-    //@ts-ignore
     dispatch({ type: types.SET_PLAYER, data: { status: !state.player.status } });
   }
 
   function adjustAnimation(time: number) {
-    //@ts-ignore
     dispatch({ type: types.SET_PLAYING_TIME, data: time * state.player.duration });
-    //@ts-ignore
     dispatch({ type: types.SET_PLAYER, data: { status: true }});
   }
 
@@ -54,10 +50,9 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
     setPlayList_f(1)
   }
   function handleTogglePlayMode() {
-    let newMode = PlayMode.onByOne;
-    newMode = state.player.mode === PlayMode.onByOne ? PlayMode.circleOne : PlayMode.onByOne;
-    Toast.info(state.player.mode === PlayMode.onByOne ? '单曲循环' : '顺序播放', 1);
-    //@ts-ignore
+    let newMode = EPlayMode.onByOne;
+    newMode = state.player.mode === EPlayMode.onByOne ? EPlayMode.circleOne : EPlayMode.onByOne;
+    Toast.info(state.player.mode === EPlayMode.onByOne ? '单曲循环' : '顺序播放', 1);
     dispatch({ type: types.SET_PLAYER, data: { mode: newMode } })
   }
   function handleToggleSong(direction: boolean) {
@@ -66,18 +61,14 @@ const PlayerCom: React.FC<IPlayerProps> = props => {
         Toast.info("当前已是第一首歌曲");
         return;
       }
-      //@ts-ignore
-      dispatch({ type: types.SET_SONG, data: state.playList.tracks[state.playingIndex - 1] });
-      //@ts-ignore
+      dispatch({ type: types.SET_SONG, data: state.playList[state.playingIndex - 1] });
       dispatch({ type: types.SET_PLAYING_INDEX, data: state.playingIndex - 1 });
     } else {
       if(state.playingIndex === state.playList.length - 1) {
         Toast.info("当前已是最后一首歌曲");
         return;
       }
-      //@ts-ignore
-      dispatch({ type: types.SET_SONG, data: state.playList.tracks[state.playingIndex + 1] });
-      //@ts-ignore
+      dispatch({ type: types.SET_SONG, data: state.playList[state.playingIndex + 1] });
       dispatch({ type: types.SET_PLAYING_INDEX, data: state.playingIndex + 1 });
     }
   }

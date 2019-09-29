@@ -1,4 +1,4 @@
-import React, {Fragment, useContext} from "react"
+import React, {useContext} from "react"
 import {RouteComponentProps, withRouter} from 'react-router-dom'
 //@ts-ignore
 import playListStyle from './playList.module.less'
@@ -23,11 +23,8 @@ const PLAY_LIST: React.FC<IPlayListProps> = props => {
   }
   function handleSetPlayer(index: number) {
     props.history.push(`/player/${ state.playList[index].id }/${ state.playList[index].dt }`);
-    //@ts-ignore
     dispatch({ type: SET_PLAYING_INDEX, data: index });
-    // @ts-ignore
-    dispatch({ type: types.SET_SONG, data: state.playList.tracks[index] });
-    // @ts-ignore
+    dispatch({ type: types.SET_SONG, data: state.playList[index] });
     dispatch({ type: types.SET_PLAYING_INDEX, data: index });
   }
 

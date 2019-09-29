@@ -1,5 +1,5 @@
 //recommend
-import {PlayMode} from "../constant";
+import {EPlayMode} from "../constant";
 
 export interface IAl {
   id: number,
@@ -60,13 +60,22 @@ export interface IArtist {
   name: string
 }
 
+export interface IAlbum {
+  id: number,
+  name: string,
+  size: number,
+  blurPicUrl: string,
+  picUrl: string,
+  artist: IArtist
+}
+
 export interface IPlayer {
   url: string,
   status: boolean,
   picUrl: string,
   currentTime: number,
   duration: number,
-  mode: PlayMode
+  mode: EPlayMode
 }
 
 export interface ISearchResult {
@@ -77,5 +86,13 @@ export interface ISearchResult {
   artist: {
     moreText: string,
     artists: Array<IArtist>
+  },
+  album: {
+    moreText: string,
+    albums: Array<IAlbum>
   }
+}
+
+export interface ITrackComment {
+  content: string
 }

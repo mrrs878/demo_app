@@ -1,4 +1,13 @@
-import {IBanner, IRecommendList, IPlayer, IArtist, ISingerHotSong, IPlayList, ISearchResult} from './index'
+import {
+  IBanner,
+  IRecommendList,
+  IPlayer,
+  IArtist,
+  ISingerHotSong,
+  IPlayList,
+  ISearchResult,
+  ITrackComment
+} from './index'
 
 export interface IBannerRes {
   banners: Array<IBanner>,
@@ -52,4 +61,10 @@ export interface ISearchSugRes {
   result: {
     allMatch: Array<{keyword: string}>
   }
+}
+
+export interface IGetTrackCommentsRes {
+  code: number,
+  total: number,
+  comments: Array<ITrackComment>
 }

@@ -33,7 +33,7 @@ const MPlayer: React.FC<IFooterProps> = props => {
 
   return (
     <div className={ mPlayerStyle.content } style={{ opacity: !props.location.pathname.includes('player') && state.song.id ? 1 : 0 }}>
-      <div className={mPlayerStyle.pic} style={{ backgroundImage: picUrl, animationPlayState: state.player.status ? 'running' : 'paused' }} onClick={ handleToPlayerPage }/>
+      <div className={mPlayerStyle.pic} style={{ backgroundImage: state.singer.picUrl ? `url(${state.singer.picUrl})` : 'unset', animationPlayState: state.player.status ? 'running' : 'paused' }} onClick={ handleToPlayerPage }/>
       <div className={ mPlayerStyle.info } onClick={ handleToPlayerPage }>
         <span className={ mPlayerStyle.infoItem }>{ state.song.name || '云音悦' }</span>
         <span className={ mPlayerStyle.infoItem }>{ state.song.ar[0] ? state.song.ar[0].name : '云音悦' }</span>
